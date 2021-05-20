@@ -4,17 +4,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class radioTest {
+class RadioTest {
     @Test
     public void shouldCreate() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(12);
     }
 
     @Test
     public void shouldInitFieldToZeroValues() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(12);
         assertEquals(0, radio.getNumberRadiostation());
-        assertEquals(9, radio.getNumberRadiostationMax());
+        assertEquals(12, radio.getNumberRadiostationMax());
         assertEquals(0, radio.getNumberRadiostationMin());
         assertEquals(0, radio.getVolume());
         assertEquals(10, radio.getVolumeMax());
@@ -23,7 +23,7 @@ class radioTest {
 
     @Test
     public void setFromController() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(12);
         radio.setNumberRadiostation(1);
         assertEquals(1, radio.getNumberRadiostation());
         radio.setNumberRadiostation(2);
@@ -42,6 +42,8 @@ class radioTest {
         assertEquals(8, radio.getNumberRadiostation());
         radio.setNumberRadiostation(9);
         assertEquals(9, radio.getNumberRadiostation());
+        radio.setNumberRadiostation(12);
+        assertEquals(12, radio.getNumberRadiostation());
 
     }
 
@@ -71,17 +73,35 @@ class radioTest {
 
     @Test
     public void increaseLimitNumberRadioStation() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(12);
         radio.setNumberRadiostation(9);
+        radio.increaseRadiaStation();
+        assertEquals(10, radio.getNumberRadiostation());
+    }
+    @Test
+    public void increaseLimitNumberRadioStationNew() {
+        Radio radio = new Radio(12);
+        radio.setNumberRadiostation(12);
         radio.increaseRadiaStation();
         assertEquals(0, radio.getNumberRadiostation());
     }
-
+    @Test
+    public void decreaseLimitNumberRadioStationNew() {
+        Radio radio = new Radio(12);
+        radio.setNumberRadiostation(0);
+        radio.decreaseRadiostation();
+        assertEquals(12, radio.getNumberRadiostation());
+    }
     @Test
     public void MaximumRadiostation() {
         Radio radio = new Radio();
-        radio.setNumberRadiostation(32);
-        assertEquals(9, radio.getNumberRadiostation());
+        assertEquals(10, radio.getNumberRadiostationMax());
+    }
+
+    @Test
+    public void MaximumRadiostationNew() {
+        Radio radio = new Radio(12);
+        assertEquals(12, radio.getNumberRadiostationMax());
     }
 
     @Test
@@ -94,9 +114,9 @@ class radioTest {
     @Test
     public void increaseLimitVolume() {
         Radio radio = new Radio();
-        radio.setVolume(10);
+        radio.setVolume(100);
         radio.increaseVolume();
-        assertEquals(10, radio.getVolume());
+        assertEquals(100, radio.getVolume());
     }
 
     @Test
