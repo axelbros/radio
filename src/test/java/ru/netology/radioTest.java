@@ -17,7 +17,7 @@ class RadioTest {
         assertEquals(12, radio.getNumberRadiostationMax());
         assertEquals(0, radio.getNumberRadiostationMin());
         assertEquals(0, radio.getVolume());
-        assertEquals(10, radio.getVolumeMax());
+        assertEquals(100, radio.getVolumeMax());
         assertEquals(0, radio.getVolumeMin());
     }
 
@@ -68,10 +68,16 @@ class RadioTest {
         Radio radio = new Radio();
         radio.setNumberRadiostation(0);
         radio.decreaseRadiostation();
-        assertEquals(9, radio.getNumberRadiostation());
+        assertEquals(10, radio.getNumberRadiostation());
     }
-
     @Test
+    public void decreaseLimitNumberRadioStationNew() {
+        Radio radio = new Radio(12);
+        radio.setNumberRadiostation(0);
+        radio.decreaseRadiostation();
+        assertEquals(12, radio.getNumberRadiostation());
+    }
+   @Test
     public void increaseLimitNumberRadioStation() {
         Radio radio = new Radio(12);
         radio.setNumberRadiostation(9);
@@ -85,13 +91,7 @@ class RadioTest {
         radio.increaseRadiaStation();
         assertEquals(0, radio.getNumberRadiostation());
     }
-    @Test
-    public void decreaseLimitNumberRadioStationNew() {
-        Radio radio = new Radio(12);
-        radio.setNumberRadiostation(0);
-        radio.decreaseRadiostation();
-        assertEquals(12, radio.getNumberRadiostation());
-    }
+
     @Test
     public void MaximumRadiostation() {
         Radio radio = new Radio();
@@ -146,8 +146,8 @@ class RadioTest {
     @Test
     public void MaxVolume() {
         Radio radio = new Radio();
-        radio.setVolume(13);
-        assertEquals(10, radio.getVolume());
+        radio.setVolume(106);
+        assertEquals(100, radio.getVolume());
     }
 
     @Test
